@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 class TestGithubOrgClient(unittest.TestCase):
 
     @parameterized.expand([
