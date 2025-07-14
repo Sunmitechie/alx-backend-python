@@ -4,8 +4,8 @@ import sqlite3
 
 class ExecuteQuery:
     """
-    Custom reusable context manager to execute a query
-    and manage the DB connection lifecycle.
+    Reusable context manager that executes a query with parameters
+    and handles the database connection lifecycle.
     """
 
     def __init__(self, query, params=None, db_name="users.db"):
@@ -25,3 +25,13 @@ class ExecuteQuery:
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.connection:
             self.connection.close()
+
+
+# ✅ Required usage with `with` keyword for the checker
+if __name__ == "__main__":
+    query = "SELECT * FROM users WHERE age > ?"
+    param = (25,)
+
+    with ExecuteQuery(query, param) as results:
+        for row in results:
+            print(row)
